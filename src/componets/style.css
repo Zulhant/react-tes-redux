@@ -1,0 +1,9 @@
+.navbar-bottom-position {
+  width: 540px;
+}
+
+.navbar-bottom-position .row .col {
+  float: none;
+  margin: 0 auto;
+  text-align: "center";
+}
