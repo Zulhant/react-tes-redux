@@ -4,12 +4,9 @@ import { createStore, combineReducers } from "redux";
 import userReducer from "./redux/reducers/users";
 import productReducer from "./redux/reducers/product";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomePage from "./containers/home";
-import ProductPage from "./containers/product";
-import ProductDetail from "./containers/product/detailProduct";
-import LoginPage from "./containers/login";
+import { BrowserRouter } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import ContainerIndex from "./containers";
 
 const combinate = combineReducers({
   user: userReducer,
@@ -25,17 +22,13 @@ function App() {
   return (
     <Container
       style={{
-        maxWidth: 540
+        maxWidth: 540,
+        backgroundColor: "white"
       }}
     >
       <Provider store={storeRedux}>
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/product" component={ProductPage} />
-            <Route exact path="/product/:id" component={ProductDetail} />
-          </Switch>
+          <ContainerIndex />
         </BrowserRouter>
       </Provider>
     </Container>

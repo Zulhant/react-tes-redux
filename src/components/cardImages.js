@@ -1,9 +1,9 @@
 import React from "react";
 import { Image } from "react-bootstrap";
 
-function CardImage({ image, label }) {
+function CardImage({ image, label, textAlign }) {
   return (
-    <div>
+    <div className="card-images">
       <Image
         src={image}
         roundedCircle
@@ -14,9 +14,7 @@ function CardImage({ image, label }) {
         }}
       />
       <br />
-      <center>
-        <label>{label}</label>
-      </center>
+      <label style={{ textAlign }}>{label}</label>
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
 
 import { getListProduct } from "../api/product";
 import "./style.css";
+import Logo from "../logo.svg";
 
 function NavbarApp(props) {
   const onChangeInputSearch = e => {
@@ -26,47 +27,56 @@ function NavbarApp(props) {
     }
   };
 
-  const onLogout = () => {
-    if (props.user.userInfo.name) {
-      localStorage.removeItem("access_user_google");
-      localStorage.removeItem("access_user_fb");
-    }
-
-    props.history.push("/login");
-  };
-
   return (
     <Navbar className={props.navbarPosition}>
       <Container
         style={{
-          maxWidth: "540px"
+          maxWidth: "500px"
         }}
       >
         {props.navbarPosition == "navbar fixed-bottom" ? (
           <div className="navbar-bottom-position">
             <Row>
               <Col>
-                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/">
+                  <i className="fas fa-home"></i>
+                  <br />
+                  Home
+                </Nav.Link>
               </Col>
               <Col>
-                <Nav.Link href="/product">Feed</Nav.Link>
+                <Nav.Link href="/product">
+                  <i className="fas fa-rss-square"></i>
+                  <br />
+                  Feed
+                </Nav.Link>
               </Col>
               <Col>
-                <Nav.Link href="/cart">Cart</Nav.Link>
+                <Nav.Link href="/cart">
+                  <i className="fas fa-cart-plus"></i>
+                  <br />
+                  Cart
+                </Nav.Link>
               </Col>
               <Col>
-                <Nav.Link>Profile</Nav.Link>
+                <Nav.Link href="/profile">
+                  <i className="fas fa-user-circle"></i>
+                  <br />
+                  Profile
+                </Nav.Link>
               </Col>
             </Row>
           </div>
         ) : (
           <>
-            <Navbar.Brand href="/">Logo</Navbar.Brand>
+            <Navbar.Brand href="/">
+              <img width={60} src={Logo} />
+            </Navbar.Brand>
             <Form inline>
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text>
-                    <i className="fas fa-user" />
+                  <InputGroup.Text className="form-input-icon">
+                    <i className="fas fa-search" />
                   </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
@@ -74,9 +84,7 @@ function NavbarApp(props) {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   onChange={onChangeInputSearch.bind(this)}
-                  style={{
-                    width: 300
-                  }}
+                  className="form-input"
                 />
               </InputGroup>
             </Form>

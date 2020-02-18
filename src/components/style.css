@@ -1,0 +1,25 @@
+.navbar-bottom-position {
+  width: 540px;
+  text-align: center;
+}
+
+.navbar-bottom-position .row .col {
+  float: none;
+  margin: 0 auto;
+  text-align: "center";
+}
+
+.form-input-icon {
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
+}
+
+.form-input {
+  width: 300px !important;
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+.nav-link {
+  color: #2b2a2a !important;
+}

@@ -20,18 +20,13 @@ function Login(props) {
   };
 
   return (
-    <Container
-      style={{
-        maxWidth: 540
-      }}
-    >
+    <>
       <Row
         style={{
           marginTop: "10%"
         }}
       >
-        <Col lg={4} />
-        <Col lg={4}>
+        <Col sm={12}>
           <Card>
             <Card.Body>
               <h4 align="center">Login</h4>
@@ -93,9 +88,8 @@ function Login(props) {
             </Card.Body>
           </Card>
         </Col>
-        <Col lg={4} />
       </Row>
-    </Container>
+    </>
   );
 }
 
