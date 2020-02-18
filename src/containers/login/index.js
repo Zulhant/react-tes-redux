@@ -1,21 +1,43 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Row, Card, Col, Form, Button, Container } from "react-bootstrap";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import "./style.css";
+import { useHistory } from "react-router";
 
-function Login(props) {
+function Login() {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  const handleEmail = e => {
+    if (e.key == "Enter") {
+      passwordRef.current.focus();
+    }
+  };
+
+  const handlePassword = e => {
+    if (e.key == "Enter") {
+      alert("silahkan pilih login by google dan facebook");
+    }
+  };
+
   const onLoginWithFacebook = response => {
     if (response) {
       localStorage.setItem("access_user_fb", JSON.stringify(response));
-      props.history.push("/");
+      history.push("/");
     }
   };
 
   const onLoginWithGoogle = response => {
     if (response) {
       localStorage.setItem("access_user_google", JSON.stringify(response));
-      props.history.push("/");
+      history.push("/");
     }
   };
 
@@ -32,12 +54,22 @@ function Login(props) {
               <h4 align="center">Login</h4>
             </Card.Body>
             <Card.Body>
-              <Form>
+              <>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Control type="email" placeholder="Enter email" />
+                  <Form.Control
+                    ref={emailRef}
+                    onKeyDown={handleEmail}
+                    type="email"
+                    placeholder="Enter email"
+                  />
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control
+                    ref={passwordRef}
+                    onKeyDown={handlePassword}
+                    type="password"
+                    placeholder="Password"
+                  />
                 </Form.Group>
                 <Row>
                   <Col lg={6} md={6} xs={6}>
@@ -59,7 +91,7 @@ function Login(props) {
                 </Row>
                 <br />
                 <FacebookLogin
-                  appId="199496228064861"
+                  appId=""
                   autoLoad={false}
                   fields="name,email,picture"
                   callback={onLoginWithFacebook}
@@ -68,7 +100,7 @@ function Login(props) {
                 ,
                 <br />
                 <GoogleLogin
-                  clientId="1080661092279-dd4cnlgpg3depnao0ac2ptrlh53od5mr.apps.googleusercontent.com"
+                  clientId=""
                   buttonText="Login"
                   onSuccess={onLoginWithGoogle}
                   onFailure={onLoginWithGoogle}
@@ -84,7 +116,7 @@ function Login(props) {
                   )}
                 />
                 <br />
-              </Form>
+              </>
             </Card.Body>
           </Card>
         </Col>

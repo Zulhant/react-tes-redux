@@ -5,11 +5,10 @@ function Loading() {
     <div
       style={{
         marginTop: "20%",
-        textAlign: "center",
-        fontSize: 20
+        textAlign: "center"
       }}
     >
-      <i className="fas fa-spinner"></i>
+      <p>Silahkan Tunggu</p>
     </div>
   );
 }

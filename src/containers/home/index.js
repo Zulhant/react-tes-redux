@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
-import { Row, Alert } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../../redux/actions/product";
+import * as actionUser from "../../redux/actions/users";
 
 import CardItems from "../../components/cardItems";
 import CardImage from "../../components/cardImages";
 import Loading from "../../components/loading";
-
 import * as actionApiProduct from "../../api/product";
+
+import { getUserInfo } from "../../storages";
 
 import "./style.css";
 
@@ -87,7 +89,8 @@ const mapStateToProps = state => {
 const mapDispathToProps = dispatch => {
   return bindActionCreators(
     {
-      ...actions
+      ...actions,
+      ...actionUser
     },
     dispatch
   );

@@ -4,9 +4,18 @@ import { createStore, combineReducers } from "redux";
 import userReducer from "./redux/reducers/users";
 import productReducer from "./redux/reducers/product";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import ContainerIndex from "./containers";
+import { applyMiddleware } from "redux";
+
+const Logger = store => next => action => {
+  let { user } = store.getState();
+
+  if (!user.userInfo) {
+    return;
+  }
+  next(action);
+};
 
 const combinate = combineReducers({
   user: userReducer,
@@ -15,7 +24,9 @@ const combinate = combineReducers({
 
 const storeRedux = createStore(
   combinate,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  {},
+  applyMiddleware(Logger)
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 function App() {
@@ -27,9 +38,7 @@ function App() {
       }}
     >
       <Provider store={storeRedux}>
-        <BrowserRouter>
-          <ContainerIndex />
-        </BrowserRouter>
+        <ContainerIndex />
       </Provider>
     </Container>
   );

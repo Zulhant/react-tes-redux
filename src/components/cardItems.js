@@ -30,10 +30,13 @@ function CardItems({
         <Link to={href}>
           <Card.Img height={imageHeight} variant="top" src={image} />
         </Link>
+
         <Card.Body>
+          <i className="fas fa-heart"></i>
           <Card.Title
             style={{
-              textAlign
+              textAlign,
+              fontSize: 14
             }}
           >
             {label}

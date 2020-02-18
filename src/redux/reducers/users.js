@@ -1,14 +1,14 @@
+import { getUserInfo } from "../../storages";
 import { GET_USER_DATA } from "../action-types/users";
 
 const initialState = {
-  userInfo: {}
+  userInfo: null
 };
 
 const userReduser = (state = initialState, action) => {
-  let fb = localStorage.getItem("access_user_fb");
-  let google = localStorage.getItem("access_user_google");
+  const { fb, google } = getUserInfo();
 
-  let newUser = {};
+  let newUser = null;
 
   if (google) {
     newUser = JSON.parse(google).profileObj;
@@ -18,11 +18,16 @@ const userReduser = (state = initialState, action) => {
     newUser = JSON.parse(fb);
   }
 
-  console.log("new user", newUser);
-
-  return {
-    userInfo: newUser
-  };
+  switch (action.type) {
+    case GET_USER_DATA:
+      return {
+        userInfo: action.payload
+      };
+    default:
+      return {
+        userInfo: newUser
+      };
+  }
 };
 
 export default userReduser;

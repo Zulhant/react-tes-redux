@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Image, Card, Col, Row, Button } from "react-bootstrap";
+import { Image, Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 
 function Profile(props) {
-  console.log("props", props);
-
   const user = props.user.userInfo;
 
   const onLogout = () => {
@@ -22,21 +21,30 @@ function Profile(props) {
     <>
       <Card>
         <Card.Body className="card-profile">
-          <center>
-            <Image src={user.imageUrl} roundedCircle />
-          </center>
-          <hr />
-          <label>FullName</label>
-          <br />
-          <p>{user.name}</p>
+          {user ? (
+            <div>
+              <center>
+                <Image src={user.imageUrl} roundedCircle />
+              </center>
+              <hr />
+              <label>FullName</label>
+              <br />
+              <p>{user.name}</p>
 
-          <label>Email</label>
-          <br />
-          <p>{user.email}</p>
+              <label>Email</label>
+              <br />
+              <p>{user.email}</p>
 
-          <hr />
-
-          <Button onClick={onLogout}>Logout</Button>
+              <hr />
+              <Button onClick={onLogout}>Logout</Button>
+            </div>
+          ) : (
+            <div>
+              <Link to="/login">
+                <Button>Login</Button>
+              </Link>
+            </div>
+          )}
         </Card.Body>
       </Card>
     </>

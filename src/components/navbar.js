@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   Navbar,
   Container,
@@ -15,15 +15,20 @@ import "./style.css";
 import Logo from "../logo.svg";
 
 function NavbarApp(props) {
-  const onChangeInputSearch = e => {
-    let val = e.target.value;
+  const [search, setSearch] = useState("");
 
-    if (!val) {
+  const onChangeInputSearch = e => {
+    setSearch(e.target.value);
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (!search) {
       getListProduct().then(response => {
         props.getProduct(response[0]);
       });
     } else {
-      props.getProductBySearch(val);
+      props.getProductBySearch(search);
     }
   };
 
@@ -72,18 +77,14 @@ function NavbarApp(props) {
             <Navbar.Brand href="/">
               <img width={60} src={Logo} />
             </Navbar.Brand>
-            <Form inline>
+            <Form inline onSubmit={onSubmit}>
               <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text className="form-input-icon">
-                    <i className="fas fa-search" />
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
                 <FormControl
                   placeholder="Search"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
-                  onChange={onChangeInputSearch.bind(this)}
+                  onChange={onChangeInputSearch}
+                  value={search}
                   className="form-input"
                 />
               </InputGroup>
